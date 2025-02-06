@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>集荷依頼</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<script>
+    function saveSelection() {
+        const date = document.getElementById('dateSelect').value;
+        const time = document.getElementById('timeSelect').value;
+        localStorage.setItem('selectedDate', date);
+        localStorage.setItem('selectedTime', time);
+    }
+</script>
+
+<body>
+    <div class="container">
+        <div class="header">集荷依頼</div>
+        <table class="info-table">
+            <tr>
+                <td>集荷可能日時</td>
+                <td>2025/1/21(火)9時以降</td>
+            </tr>
+            <tr>
+                <td>農家名</td>
+                <td>農家A</td>
+            </tr>
+            <tr>
+                <td>住所</td>
+                <td>******</td>
+            </tr>
+            <tr>
+                <td>梱包数</td>
+                <td>8袋</td>
+            </tr>
+            <tr>
+                <td>備考</td>
+                <td>あああああああああああああ</td>
+            </tr>
+        </table>
+        <div class="header">引き取り日時</div>
+        <select id="dateSelect">
+            <option value="">受取日 ▼</option>
+            <option value="2025-01-21">2025/1/21(火)</option>
+            <option value="2025-01-22">2025/1/22(水)</option>
+            <option value="2025-01-23">2025/1/23(木)</option>
+            <option value="2025-01-24">2025/1/24(金)</option>
+            <option value="2025-01-25">2025/1/25(土)</option>
+        </select>
+        <select id="timeSelect">
+            <option value="">日時 ▼</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+        </select>
+        <div class="button-container">
+            <a href="/" class="button button-gray">戻る</a>
+            <a href="/request-submit.html" class="button" onclick="saveSelection()">送信する</a>
+        </div>
+    </div>
+</body>
+
+</html>

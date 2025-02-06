@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>集荷依頼</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        const selectedDate = localStorage.getItem('selectedDate') || '未選択';
+        const selectedTime = localStorage.getItem('selectedTime') || '未選択';
+        document.getElementById('result').innerText = `${selectedDate}日 ${selectedTime}分`;
+    });</script>
+
+<body>
+    <div class="container">
+        <div class="header">集荷依頼</div>
+        <table class="info-table">
+            <tr>
+                <td>集荷可能日時</td>
+                <td>2025/1/21(火)9時以降</td>
+            </tr>
+            <tr>
+                <td>農家名</td>
+                <td>農家A</td>
+            </tr>
+            <tr>
+                <td>住所</td>
+                <td>******</td>
+            </tr>
+            <tr>
+                <td>梱包数</td>
+                <td>8袋</td>
+            </tr>
+            <tr>
+                <td>備考</td>
+                <td>あああああああああああああ</td>
+            </tr>
+        </table>
+        <div class="header">引き取り日時</div>
+        <table class="info-table">
+            <tr>
+                <td>集荷日時</td>
+                <td id="result"></td>
+            </tr>
+        </table>
+        <div class="button-container">
+            <a href="/" class="button button-gray">ホーム画面へ戻る</a>
+        </div>
+    </div>
+</body>
+
+</html>
