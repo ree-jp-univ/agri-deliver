@@ -12,7 +12,10 @@
     window.addEventListener('DOMContentLoaded', function () {
         const selectedDate = localStorage.getItem('selectedDate') || '未選択';
         const selectedTime = localStorage.getItem('selectedTime') || '未選択';
-        document.getElementById('result').innerText = `${selectedDate}日 ${selectedTime}分`;
+        const selectedDate2 = localStorage.getItem('selectedDate2') || '未選択';
+        const selectedTime2 = localStorage.getItem('selectedTime2') || '未選択';
+        document.getElementById('result').innerText = `${selectedDate} ${selectedTime}`;
+        document.getElementById('result2').innerText = `${selectedDate2} ${selectedTime2}`;
     });</script>
 
 <body>
@@ -45,6 +48,13 @@
             <tr>
                 <td>集荷日時</td>
                 <td id="result"></td>
+            </tr>
+        </table>
+        <div class="header">配送予定日時</div>
+        <table class="info-table">
+            <tr>
+                <td>配送予定日時</td>
+                <td id="result2"></td>
             </tr>
         </table>
         <div class="button-container">
