@@ -24,10 +24,13 @@
         QrScanner.WORKER_PATH = "https://esm.sh/qr-scanner@1.4.2/qr-scanner-worker.min.js";
 
         window.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const num = params.get("num") || '2';
+
             const videoElem = document.getElementById("qr-video");
             const resultElem = document.getElementById("qr-result");
             const scannedResults = [];
-            const maxResults = 8;
+            const maxResults = Number(num);
 
             const qrScanner = new QrScanner(videoElem, result => {
                 const data = result.data;
@@ -40,9 +43,18 @@
                     scannedResults.shift();
                 }
                 scannedResults.push(data);
-                resultElem.innerText =
-                    `読み取り結果 (${scannedResults.length}/${maxResults}):\n` +
-                    scannedResults.join("\n");
+                if (scannedResults.length === maxResults) {
+                    qrScanner.stop(); // 読み取りを停止
+                    resultElem.innerText =
+                        `読み取り結果 (${scannedResults.length}/${maxResults}):\n` +
+                        scannedResults.join("\n") +
+                        "\n完了！";
+                        alert("QRコードの読み取りが完了しました！");
+                } else {
+                    resultElem.innerText =
+                        `読み取り結果 (${scannedResults.length}/${maxResults}):\n` +
+                        scannedResults.join("\n");
+                }
             }, {
                 onDecodeError: error => { /* エラーを無視 */ },
                 highlightScanRegion: true,
@@ -58,7 +70,7 @@
         <video id="qr-video"></video>
         <div id="qr-result">読み取り結果: なし</div>
         <div class="button-container">
-            <a href="./" class="button button-gray">中断する</a>
+            <a href="./" class="button button-gray">ホーム画面へ戻る</a>
         </div>
     </div>
 </body>

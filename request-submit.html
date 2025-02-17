@@ -10,12 +10,38 @@
 
 <script>
     window.addEventListener('DOMContentLoaded', function () {
+        const packingId = localStorage.getItem("packingId");
+        fetch(`http://localhost:8787/deliver/packing?packingId=${packingId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("farmer-name").innerText = data.farmer.name;
+                document.getElementById("farmer-address").innerText = data.farmer.address;
+                document.getElementById("box-num").innerText = data.packing.num;
+                document.getElementById("receive-place").innerText = data.orders.receivePlace;
+            })
+
         const selectedDate = localStorage.getItem('selectedDate') || '未選択';
         const selectedTime = localStorage.getItem('selectedTime') || '未選択';
         const selectedDate2 = localStorage.getItem('selectedDate2') || '未選択';
         const selectedTime2 = localStorage.getItem('selectedTime2') || '未選択';
-        document.getElementById('result').innerText = `${selectedDate} ${selectedTime}`;
-        document.getElementById('result2').innerText = `${selectedDate2} ${selectedTime2}`;
+
+        const postData = {
+            packingId: Number(packingId),
+            collectionDate: `${selectedDate} ${selectedTime}`,
+            receiveDate: `${selectedDate2} ${selectedTime2}`
+        };
+        fetch('http://localhost:8787/deliver/packing', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        })
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById('result').innerText = `${selectedDate} ${selectedTime}`;
+                document.getElementById('result2').innerText = `${selectedDate2} ${selectedTime2}`;
+            })
     });</script>
 
 <body>
@@ -24,23 +50,27 @@
         <table class="info-table">
             <tr>
                 <td>集荷可能日時</td>
-                <td>2025/1/21(火)9時以降</td>
+                <td>2025/1/21日 9時以降</td>
             </tr>
             <tr>
                 <td>農家名</td>
-                <td>農家A</td>
+                <td id="farmer-name">農家A</td>
             </tr>
             <tr>
-                <td>住所</td>
-                <td>******</td>
+                <td>集荷住所</td>
+                <td id="farmer-address">....</td>
+            </tr>
+            <tr>
+                <td>配送先</td>
+                <td id="receive-place">名古屋市立みどり幼稚園</td>
             </tr>
             <tr>
                 <td>梱包数</td>
-                <td>8袋</td>
+                <td id="box-num">2袋</td>
             </tr>
             <tr>
                 <td>備考</td>
-                <td>あああああああああああああ</td>
+                <td id="memo">...</td>
             </tr>
         </table>
         <div class="header">引き取り日時</div>
